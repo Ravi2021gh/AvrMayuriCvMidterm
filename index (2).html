@@ -1,0 +1,705 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Computer Vision (CV)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8d82e943-48a8-45b1-9bf1-020affe2fba7" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🤖</span></div><h1 class="page-title">Computer Vision (CV)</h1><p class="page-description"></p></header><div class="page-body"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5f05fff3-be8e-4a35-8f03-afb0616222f5"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">Important Question for Mid-Sem Exam.</div></figure><h2 id="a44c3e1b-f6ad-49ad-a9e5-3b1216a5d7d6" class="">MODULE 1 :</h2><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">What is computer vision? Explain the real time applications.</summary><div class="indented"><h3 id="05a45ec6-530a-4fa4-a7b9-ca4a5690f24a" class="block-color-teal"><em>Computer vision —&gt;</em></h3><p id="6b341d58-d071-4c8a-a2b2-846abc6948b4" class=""><em>It is a field of artificial intelligence that focuses on enabling computers to gain a visual understanding of the world. It involves developing algorithms and techniques that allow machines to extract useful information from digital images or videos. Computer vision aims to replicate and enhance human vision capabilities, such as object recognition, scene understanding, motion tracking, and image analysis.</em></p><h3 id="33bb8ceb-fc21-401f-8c6e-3632b1dd83e4" class="block-color-teal"><em>Real Time Applications Examples —&gt;</em></h3><ol type="1" id="4257e9c4-20f5-41c8-b819-b7b26cd0c538" class="numbered-list" start="1"><li><code><em><strong>Object Recognition:</strong></em></code> Computer vision can be used to identify and classify objects within an image or video stream. This technology finds applications in various areas such as autonomous vehicles, where it helps in detecting and tracking pedestrians, traffic signs, and other vehicles.</li></ol><ol type="1" id="2d466770-9103-412f-aa94-8e3900c50247" class="numbered-list" start="2"><li><code><em><strong>Face Recognition:</strong></em></code><em><strong> </strong></em>Computer vision techniques can analyze facial features and match them against a database of known faces. This application has numerous applications, including biometric security systems, surveillance systems, and photo organization software.</li></ol><ol type="1" id="cd101e4f-e69c-4425-b734-16a9ec1b33d9" class="numbered-list" start="3"><li><code><em><strong>Augmented Reality (AR):</strong></em></code> AR overlays digital information onto the real-world environment. Computer vision enables AR systems to understand the user&#x27;s surroundings, track objects, and accurately place virtual elements in the real world. This technology is used in gaming, navigation, design, and marketing.</li></ol></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Basic Geometric representations, Orthogonal, Euclidean, Affine and Projective Transformation.</summary><div class="indented"><h3 id="70d58806-9ae1-4d56-b53c-c58a667a6e50" class=""><mark class="highlight-teal">Basic Geometric representations —&gt;</mark></h3><ol type="1" id="08021092-f1a6-48a4-bba0-5e048c681eef" class="numbered-list" start="1"><li><code>Point:
+</code><em>A point represents a location in space and has no size or shape.</em><p id="d50c6415-4174-48a0-947f-4b135699bffd" class="">Example: The coordinates (3, 4) represent a point in a two-dimensional space, with x-coordinate 3 and y-coordinate 4.</p></li></ol><ol type="1" id="78adb3c6-6408-4c2e-a97e-4be20146132d" class="numbered-list" start="2"><li><code>Line:
+</code><em>A line is an infinitely long and straight collection of points.</em><p id="a127f745-eec0-4d60-a4cb-548c02f193a9" class="">Example: The line passing through points A(1, 2) and B(4, 6) represents all the points that lie on the straight path between A and B.</p></li></ol><ol type="1" id="144c8533-bd67-49c5-8621-4efa1725bb53" class="numbered-list" start="3"><li><code>Plane:
+</code><em>A plane is a flat, two-dimensional surface that extends infinitely in all directions.</em><p id="4244cc79-b4c3-41b9-8bb8-ab5cd083fdcc" class="">Example: The plane defined by three non-collinear points A(1, 2, 3), B(4, 5, 6), and C(7, 8, 9) consists of all the points that lie in the same flat surface as these three points.</p></li></ol><h2 id="357e878d-0748-40aa-a990-6ec2652ebe7f" class=""><mark class="highlight-teal">Transformations —&gt;</mark></h2><ol type="1" id="26e24209-da03-4f42-a9db-7b7f842af96f" class="numbered-list" start="1"><li><code>Orthogonal Transformation:
+</code><em>An orthogonal transformation preserves angles and lengths.</em><p id="acb64939-bf6b-4223-b7c9-b9e256f91a09" class="">Example: Rotation is an example of an orthogonal transformation. Consider a square ABCD. Rotating it by 90 degrees counterclockwise around its center would result in a new square A&#x27;B&#x27;C&#x27;D&#x27; with the same side lengths and right angles.</p></li></ol><ol type="1" id="03d6ba53-40ad-4e64-b3cd-2fc9b487fd05" class="numbered-list" start="2"><li><code>Euclidean Transformation:
+</code><em>A Euclidean transformation preserves distances but not necessarily angles.</em><p id="2fa94583-b79b-4989-b448-e3ad0b250f29" class="">Example: Scaling is an example of a Euclidean transformation. If we scale a circle by a factor of 2, the new circle will have twice the radius of the original circle while maintaining the same shape.</p></li></ol><ol type="1" id="e55bfd7e-5c71-4072-bad6-38ec536ea56c" class="numbered-list" start="3"><li><code>Affine Transformation:
+</code><em>An affine transformation is a combination of linear transformations and non-linear transformations. It preserves parallel lines but not necessarily angles or distances.</em><p id="8e5e746e-4f78-4342-95f9-db8eca089b96" class="">Example: Shearing is an example of an affine transformation. Applying a vertical shear to a square would distort it by slanting the sides while maintaining parallelism between the sides.</p></li></ol><ol type="1" id="db550e85-49c0-45dc-9aa7-0d46215f03f4" class="numbered-list" start="4"><li><code>Projective Transformation:
+</code><em>A projective transformation maps points from one coordinate system to another, accounting for perspective effects.</em><p id="3cfb14e2-3709-4935-81dc-634ac1b10546" class="">Example: In image stitching, a projective transformation is used to combine multiple images taken from different viewpoints into a single panoramic image. The transformation maps the points from each image to a common coordinate system, accounting for the perspective distortions caused by the different camera viewpoints.</p></li></ol></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Flipping an image horizontally or vertically.</summary><div class="indented"><p id="ae76dd9c-1ec3-4e0e-a0f0-0c4d3a208858" class=""><em>Flipping an image horizontally or vertically refers to a transformation that reverses the arrangement of pixels along the horizontal or vertical axis, respectively. It can be implemented by iterating through the pixels of the image and swapping their positions along the desired axis. The flipped image can be useful for various tasks, such as data augmentation, image manipulation, and comparing symmetric patterns.</em></p><ol type="1" id="ebad2eab-525f-42d5-961e-beb0d4c1fdb6" class="numbered-list" start="1"><li><code>Horizontal Flip:
+</code><em>When an image is horizontally flipped, each row of pixels is reversed, resulting in a mirror image along the vertical axis. This means that the left side of the image becomes the right side, and vice versa, while the vertical position of each pixel remains unchanged.</em><p id="9943a44e-d05a-43e1-b5c3-dd4a3ad01976" class="">Example: Consider an image of a cat facing left. After applying a horizontal flip, the cat will appear to face right, as if it were looking into a mirror.</p></li></ol><ol type="1" id="7b9caf64-e26a-4760-bd0b-e6e4cb3e8dca" class="numbered-list" start="2"><li><code>Vertical Flip:
+</code><em>When an image is vertically flipped, each column of pixels is reversed, resulting in a mirror image along the horizontal axis. This means that the top part of the image becomes the bottom part, and vice versa, while the horizontal position of each pixel remains unchanged.</em><p id="d9ff540f-37c9-43e0-b6df-72c9f91557cc" class="">Example: Suppose there is an image of a bird flying upwards. After applying a vertical flip, the bird will appear to fly downwards, as if it were reflected in water.</p></li></ol></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Explain convolution used in computer vision and briefly explain its function and applications.</summary><div class="indented"><p id="45c5e5c7-72be-4723-a549-730e88405b57" class=""><em>Convolution is a fundamental operation used in computer vision for various tasks, such as image processing, feature extraction, and deep learning. It involves applying a mathematical operation, known as convolution, between an input image and a kernel (also called a filter or mask). The result of the convolution is a transformed output image.</em></p><h2 id="a29b3a31-323c-48e3-a457-a060f016e2b8" class=""><mark class="highlight-teal">Function of convolution —&gt;</mark></h2><ul id="3e53dc1f-1c6f-4ced-9552-17e4b0ec21c9" class="bulleted-list"><li style="list-style-type:disc"><code>Filtering and Feature Extraction:</code> Convolution is often used for filtering an image to enhance certain features or extract useful information. By convolving an image with a specific kernel, desired features such as edges, textures, or corners can be highlighted or extracted. Different types of kernels can be designed to detect specific patterns or characteristics in the image.</li></ul><ul id="05575403-1434-43e3-ae34-59fce21ea901" class="bulleted-list"><li style="list-style-type:disc"><code>Smoothing and Noise Reduction:</code> Convolution with a smoothing kernel, such as a Gaussian filter, can be used to blur or smooth an image. This helps in reducing noise or removing fine details, which can be useful for tasks like denoising or image enhancement.</li></ul><ul id="0aedb968-36de-4383-9797-3a050ea190b8" class="bulleted-list"><li style="list-style-type:disc"><code>Image Transformation:</code> Convolution can be employed to transform an image by applying different spatial filters. These filters can modify the image&#x27;s appearance, emphasizing certain structures or suppressing unwanted components. Common transformations include sharpening, blurring, embossing, and edge detection.</li></ul><ul id="b4bc7d4a-6800-4fab-aad7-2b9a717cc343" class="bulleted-list"><li style="list-style-type:disc"><code>Feature Detection and Recognition:</code> Convolutional neural networks (CNNs) utilize convolution layers to automatically learn and extract features from images. By convolving the input image with a set of learnable filters, CNNs can effectively detect and recognize complex patterns and objects in images, leading to tasks like object detection, image classification, and segmentation.</li></ul><h2 id="009ae56b-26ae-4b55-8fd1-fd51f05fd3a4" class=""><mark class="highlight-teal">Applications of convolution —&gt;</mark></h2><ul id="2339dc06-487a-4101-aba7-6965debcb60d" class="bulleted-list"><li style="list-style-type:disc"><code>Edge Detection:</code> Convolution is used to detect and highlight edges in images, aiding in tasks such as boundary detection and image segmentation.</li></ul><ul id="0687a046-f02b-4b52-8166-ea4e16c3d8fb" class="bulleted-list"><li style="list-style-type:disc"><code>Image Filtering:</code> Convolution is employed for noise reduction, image enhancement, and smoothing operations, enhancing the visual quality of images.</li></ul><ul id="a7f39e47-92a8-4bec-9ed0-13c41b1f6b16" class="bulleted-list"><li style="list-style-type:disc"><code>Object Recognition:</code> Convolutional neural networks (CNNs) use convolution layers to extract features from images for tasks like object recognition, facial recognition, and scene understanding.</li></ul><ul id="929acb0e-22d9-454e-9557-f156bfba6ab1" class="bulleted-list"><li style="list-style-type:disc"><code>Texture Analysis:</code> Convolution-based filters can be applied to capture and analyze textures in images, enabling tasks like texture classification and synthesis.</li></ul><ul id="66d87838-43a0-445e-9292-c6a7c8835a22" class="bulleted-list"><li style="list-style-type:disc"><code>Image Compression:</code> Convolutional operations play a role in image compression algorithms like JPEG, where transform coding techniques are employed to reduce data redundancy.</li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Histogram Equalization with Implementation.</summary><div class="indented"><p id="5ad58ad7-aaa7-4ef2-9505-49adc1495845" class=""><em>Histogram equalization is a technique used in image processing to enhance the contrast of an image by redistributing pixel intensities. It aims to equalize the histogram of an image, making the distribution of intensities more uniform.</em></p><h2 id="313fa643-567a-4f5c-945c-87a4c1073bd3" class=""><mark class="highlight-teal">Implementation —&gt;</mark></h2><pre id="f3695bbe-e027-4b28-be57-7d66de3c3f34" class="code"><code>import cv2
+
+# Load the input image.
+image = cv2.imread(&#x27;input_image.jpg&#x27;, cv2.IMREAD_GRAYSCALE)
+
+# Apply histogram equalization funtion of open cv.
+equalized_image = cv2.equalizeHist(image)
+
+# Save the equalized image.
+cv2.imwrite(&#x27;equalized_image.jpg&#x27;, equalized_image)</code></pre><p id="8482cc23-9630-4b61-91d5-86a56971f66f" class="">This simplified implementation uses the <code><strong>equalizeHist()</strong></code> function from OpenCV to perform histogram equalization directly on the grayscale image. It automatically computes the histogram, normalizes the cumulative distribution function (CDF), and applies the intensity mapping to generate the equalized image.</p></div></details><h2 id="2f99a231-ae44-4b48-a8c2-38520235f027" class="">MODULE 2 : </h2><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Camera Parameters</summary><div class="indented"><p id="307a4e37-7666-44cd-83d5-8e910c49fca2" class=""><em>Camera parameters refer to the </em><code><em>intrinsic </em></code><em>and </em><code><em>extrinsic </em></code><em>properties that characterize a camera and its imaging system. These parameters are essential for tasks such as </em><code><em>camera calibration</em></code><em>, </em><code><em>3D reconstruction</em></code><em>, and </em><code><em>image analysis</em></code><em>. Let&#x27;s explore the two main types of camera parameters</em></p><h2 id="de453a88-424c-4e46-9146-a3f7973b4913" class=""><mark class="highlight-teal">Intrinsic Parameters —&gt;</mark></h2><p id="52dc2b35-d6f8-4dcc-9e8c-7eb4006942dc" class=""><em>Intrinsic parameters describe the internal characteristics of a camera. They are specific to the camera itself and remain constant regardless of the scene being captured.</em></p><p id="28bbeafb-15f6-4ae8-a3fc-53fb1f4e3376" class=""> The key intrinsic parameters include:</p><ul id="791d3597-56ff-4940-90e8-8bd4659932c7" class="bulleted-list"><li style="list-style-type:disc"><code>Focal Length: </code>The focal length represents the distance between the camera&#x27;s lens and the image sensor. It determines the field of view and the level of zoom in the captured images.</li></ul><ul id="28fa1f6a-6a1d-4abd-b6a5-afa08746f38a" class="bulleted-list"><li style="list-style-type:disc"><code>Principal Point:</code> The principal point refers to the image coordinates of the optical axis intersection with the image sensor. It represents the camera&#x27;s optical center.</li></ul><ul id="90b165f8-2790-4202-861d-8f358e074868" class="bulleted-list"><li style="list-style-type:disc"><code>Lens Distortion:</code> Lens distortion parameters account for the nonlinearities introduced by camera lenses, such as radial distortion and tangential distortion. Correcting for lens distortion is crucial for accurate image analysis.</li></ul><h2 id="4ccf7249-ae07-4715-9e42-6d519e113690" class=""><mark class="highlight-teal">Extrinsic Parameters —&gt;</mark></h2><p id="5b1cdd78-346b-4506-ad97-3cd82a6e7a4c" class=""><em>Extrinsic parameters define the camera&#x27;s position and orientation in 3D space relative to a world coordinate system. They describe the camera&#x27;s location and pose with respect to the scene being captured. </em></p><p id="c9ec3b80-5cb0-4f55-b22b-dd0c7f38275f" class="">The main extrinsic parameters are…</p><ul id="dfa7088a-6c9d-4452-a321-24fd0a2b286f" class="bulleted-list"><li style="list-style-type:disc"><code>Rotation Matrix:</code> The rotation matrix represents the 3D rotation of the camera relative to the world coordinate system. It defines how the camera is tilted or rotated.</li></ul><ul id="a0400d80-3349-4e49-ae94-6b8d96592c7c" class="bulleted-list"><li style="list-style-type:disc"><code>Translation Vector:</code> The translation vector specifies the camera&#x27;s 3D translation with respect to the world coordinate system. It denotes the camera&#x27;s position relative to the scene.</li></ul><p id="b4fb6493-8626-4574-8935-27646b3ef299" class="">These intrinsic and extrinsic camera parameters are crucial for various computer vision tasks, including…</p><ul id="c5e7b571-0995-4293-9dcc-c39e1d192e04" class="bulleted-list"><li style="list-style-type:disc"><code>Camera Calibration:</code> Determining the intrinsic and extrinsic parameters of a camera to correct for lens distortion, estimate the field of view, and establish a mapping between 3D world coordinates and 2D image coordinates.</li></ul><ul id="711fbb78-87cc-4259-965d-09933dba1e86" class="bulleted-list"><li style="list-style-type:disc"><code>3D Reconstruction:</code> Utilizing camera parameters to triangulate points from multiple camera views and reconstruct the 3D structure of a scene.</li></ul><ul id="22ce4010-2367-4548-825a-b6cdfc045ced" class="bulleted-list"><li style="list-style-type:disc">Augmented Reality: Incorporating camera parameters to align virtual objects with the real-world scene by mapping points from the camera view to a virtual coordinate system.</li></ul><ul id="9e708ee3-a9b4-4662-94f8-1ab2bf01f55f" class="bulleted-list"><li style="list-style-type:disc"><code>Depth Estimation:</code> Leveraging camera parameters in stereo vision or depth-from-motion algorithms to estimate the depth information of objects in the scene.</li></ul><p id="c709ef68-cb94-4dea-8354-0901af842d2f" class="">Accurate estimation and calibration of camera parameters play a critical role in computer vision applications, enabling precise analysis, measurement, and understanding of the visual data captured by cameras.</p></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Perspective Projection and its types</summary><div class="indented"><p id="38e1b068-746a-49d1-b173-d037135947b0" class=""><em>Perspective projection is a technique used in computer graphics and computer vision to project a three-dimensional (3D) scene onto a two-dimensional (2D) image plane, simulating the way human vision perceives objects in the real world. It captures the depth and perspective effects, making objects farther away appear smaller and converging parallel lines.</em></p><ul id="afb3ffae-fc23-49fb-8e0c-697e133e761f" class="bulleted-list"><li style="list-style-type:disc"><code>Weak Perspective Projection:</code>
+Weak perspective projection, also known as scaled orthographic projection, is an approximation of perspective projection used when the depth of the scene is relatively small compared to the distance from the camera. In weak perspective projection, the size of objects is scaled linearly with their distance from the camera, but the converging lines are not taken into account. It assumes that the camera is very far away compared to the scene being captured.</li></ul><ul id="a62b02c6-7668-4ca0-8d45-00e84be74bea" class="bulleted-list"><li style="list-style-type:disc"><code>Strong Perspective Projection:</code>
+Strong perspective projection, also referred to as true perspective projection, is a more accurate model that considers the depth and convergence of lines. It takes into account the foreshortening effect, where objects that are farther away from the camera appear smaller and the parallel lines seem to converge towards a vanishing point. Strong perspective projection is commonly used in computer graphics, virtual reality, and rendering realistic 3D scenes.</li></ul><p id="c59a4484-be92-4557-af87-e28694024917" class="">Both weak and strong perspective projection rely on mathematical transformations and matrix operations to map 3D points onto the 2D image plane. These projections enable the realistic rendering of 3D scenes and the estimation of depth information in computer graphics and computer vision applications.</p><p id="3da754f4-959c-4001-8292-77d437f4811c" class="">It&#x27;s worth noting that perspective projection is different from orthographic projection, where parallel lines in the 3D scene remain parallel in the 2D projection, and there is no depth or foreshortening effect. Perspective projection is a more realistic representation of how objects appear in the real world, as it captures the depth cues and visual perspective observed by human vision.</p></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Explain Stereo vision method</summary><div class="indented"><p id="7d5ce423-816e-4516-aaa5-8151d8e712e3" class=""><em>Stereo vision, also known as stereoscopic vision or binocular vision, is a method used in computer vision to perceive depth information and extract 3D structure by analyzing images from two or more cameras, mimicking the way human eyes perceive the world. It relies on the principle of triangulation to estimate the distance of objects based on the disparity between corresponding points in the images.</em></p><p id="a8407514-d7b7-4438-b13c-dc71fdc43fc8" class="">Here&#x27;s a simplified explanation of the stereo vision method:</p><ul id="4f46e529-48a8-4c9d-9aef-f882240a6927" class="bulleted-list"><li style="list-style-type:disc"><code>Stereo Camera Setup:</code> Two cameras are positioned side by side, simulating the separation of human eyes. These cameras capture two slightly different perspectives of the same scene simultaneously.</li></ul><ul id="b916831a-38ca-464e-bf6b-0bc052c8cc87" class="bulleted-list"><li style="list-style-type:disc"><code>Image Rectification:</code> The captured images are rectified, aligning corresponding epipolar lines in both images. This preprocessing step simplifies the subsequent matching process.</li></ul><ul id="a762af8e-dd02-4c8b-9166-352cc25e74e3" class="bulleted-list"><li style="list-style-type:disc"><code>Correspondence Matching:</code> Corresponding points between the rectified images are found by comparing the image intensities or features. Various algorithms can be used for this step, such as block matching, feature-based matching (e.g., SIFT, SURF), or correlation-based methods.</li></ul><ul id="e0ab065e-6166-4f57-a448-a8f7dd0e0bb3" class="bulleted-list"><li style="list-style-type:disc"><code>Disparity Computation:</code> The disparity, which is the horizontal shift of the corresponding points between the images, is computed for each pixel. The disparity represents the perceived difference in position of an object between the two camera views.</li></ul><ul id="3821a13b-cc85-427f-b930-00efc7dd21f6" class="bulleted-list"><li style="list-style-type:disc"><code>Depth Estimation:</code> Using triangulation, the depth information is estimated from the disparity. The depth is inversely proportional to the disparity, with closer objects having higher disparities and vice versa. The camera baseline (distance between the two cameras) and the camera focal length are used in this computation.</li></ul><ul id="141aee5c-8fa4-4c6e-8a0d-d011edf8ec87" class="bulleted-list"><li style="list-style-type:disc"><code>3D Reconstruction:</code> By combining the depth information with the known camera geometry, a 3D point cloud representing the scene&#x27;s structure can be reconstructed. Each point in the point cloud corresponds to a 3D location in the scene.</li></ul><p id="64843a1f-59f3-45bf-a76c-8b7c0d826543" class="">Stereo vision has numerous applications in computer vision and robotics, including:</p><ul id="b4e1295d-4ec3-43df-b954-9c45e369023c" class="bulleted-list"><li style="list-style-type:disc"><code>Depth Estimation:</code> Stereo vision provides accurate depth maps that can be used for applications like 3D reconstruction, obstacle detection, and autonomous navigation.</li></ul><ul id="82f39b2c-906e-4a73-9f57-b32b70c1ba96" class="bulleted-list"><li style="list-style-type:disc"><code>Object Recognition and Tracking:</code> By analyzing the 3D structure of the scene, stereo vision can assist in object recognition, tracking, and pose estimation.</li></ul><ul id="d9647b23-0192-4413-96d9-46a5ea4c6edc" class="bulleted-list"><li style="list-style-type:disc"><code>Augmented Reality:</code> Stereo vision enables the alignment of virtual objects with the real world, enhancing the accuracy and realism of augmented reality applications.</li></ul><ul id="f5bc36c4-a333-4f7a-aeda-191be6dce7f3" class="bulleted-list"><li style="list-style-type:disc"><code>Disparity-based Image Processing:</code> Disparity maps obtained from stereo vision can be used for tasks like image segmentation, stereo image compression, or depth-based image editing.</li></ul><p id="e179502e-a2b3-42ee-9146-334a9317d5b6" class="">Stereo vision is a powerful method for depth perception and 3D scene understanding, providing valuable information for various computer vision applications.</p></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Short notes on Epipolar geometry</summary><div class="indented"><p id="d13fde00-50c0-4576-80c2-63e52868aea1" class=""><em>Epipolar geometry is a fundamental concept in stereo vision and the study of multiple-view geometry. It provides a geometric relationship between two camera views and helps in the matching of corresponding points across the views. Here are some key points about epipolar geometry:</em></p><ul id="a2afe618-c6ba-4329-a38d-3fe032163733" class="bulleted-list"><li style="list-style-type:disc"><code>Epipolar Geometry Definition:</code> Epipolar geometry describes the relationship between two camera views capturing the same scene. It establishes the correspondence between points in one image and the lines (epipolar lines) on which the corresponding points must lie in the other image.</li></ul><ul id="67b89e0e-84ea-4969-8284-d38519af357a" class="bulleted-list"><li style="list-style-type:disc"><code>Epipole:</code> The epipole is the point of intersection of the line connecting the camera centers (baseline) with the image plane. Each image has its own epipole, and the epipoles are conjugate points with respect to the two camera views.</li></ul><ul id="c2abe138-c526-4bd0-a12e-c5c5e7885cde" class="bulleted-list"><li style="list-style-type:disc"><code>Epipolar Lines:</code> Epipolar lines are the projection of the corresponding points in one image onto the other image&#x27;s image plane. Each point in one image has its corresponding epipolar line in the other image, and all these epipolar lines intersect at the epipole.</li></ul><ul id="c2920975-57df-45f5-84d5-0c64c32bbdc7" class="bulleted-list"><li style="list-style-type:disc"><code>Epipolar Constraint:</code> The epipolar constraint states that the corresponding points in two images must lie on their respective epipolar lines. This constraint simplifies the search for correspondences by restricting the search space to a one-dimensional line rather than the entire image.</li></ul><ul id="2f5761a4-08f9-4795-8510-0c60e0c7a831" class="bulleted-list"><li style="list-style-type:disc"><code>Essential Matrix:</code> The essential matrix is a 3x3 matrix that encapsulates the epipolar geometry between two camera views. It relates the coordinates of corresponding points in the two images and encodes the information about the relative pose and calibration of the cameras.</li></ul><ul id="2001c522-78aa-4fa6-895c-4bdf8f906543" class="bulleted-list"><li style="list-style-type:disc"><code>Fundamental Matrix:</code> The fundamental matrix is similar to the essential matrix but includes information about the intrinsic parameters of the cameras as well. It establishes the epipolar geometry for calibrated and uncalibrated cameras.</li></ul><ul id="a8bdbd1d-a32a-468d-85a4-ca54967611d3" class="bulleted-list"><li style="list-style-type:disc"><code>Epipolar Geometry Applications:</code> Epipolar geometry is crucial for stereo vision tasks, such as correspondence matching, 3D reconstruction, and depth estimation. It helps in determining the relative position and orientation of the cameras and enables accurate triangulation of 3D points from their corresponding 2D points in multiple views.</li></ul><p id="c958595f-006e-480e-84d9-f17e64ab9aa8" class="">It provides geometric constraints that simplify the matching process and enable accurate reconstruction of 3D scenes from 2D images.</p></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Discuss about combining views from multiple cameras</summary><div class="indented"><p id="5b864ca3-0ecc-4bbd-a491-44415e821049" class=""><em>Combining views from multiple cameras involves the integration of images captured by multiple cameras to obtain a more comprehensive and accurate representation of a scene. This process allows for enhanced depth perception, improved coverage, and increased robustness in various computer vision applications.</em></p><ul id="4f256f02-d3d8-4483-a5c3-2638a8e7bb38" class="bulleted-list"><li style="list-style-type:disc"><code>Stereoscopic Vision:</code> Combining the views from two or more cameras can enable stereoscopic vision, which provides depth perception and 3D reconstruction. By capturing the scene from different viewpoints, the relative disparities between corresponding points can be used to estimate the scene&#x27;s depth and reconstruct a 3D model.</li></ul><ul id="2c8307f8-3b0f-4c44-960b-a8183ee2ed14" class="bulleted-list"><li style="list-style-type:disc"><code>Multi-view Geometry:</code> Multiple cameras capturing the same scene provide different perspectives and visual information. Leveraging multi-view geometry techniques, such as epipolar geometry and triangulation, allows for the accurate matching of corresponding points and the creation of a unified 3D representation.</li></ul><ul id="212cd440-70ee-449d-b467-aa9071155c36" class="bulleted-list"><li style="list-style-type:disc"><code>Coverage and Redundancy:</code> Multiple cameras can cover a larger field of view and capture more scene details compared to a single camera. This redundancy helps in overcoming occlusions, improving object tracking, and increasing the robustness of object detection and recognition algorithms.</li></ul><ul id="6faef7d2-fe3e-4849-9649-91399a6a9a19" class="bulleted-list"><li style="list-style-type:disc"><code>Image Fusion:</code> Combining views from multiple cameras can involve techniques such as image stitching or image fusion. Image stitching aligns and merges overlapping images to create a panoramic or wide-angle view. Image fusion combines complementary information from different views to enhance the overall image quality, dynamic range, or resolution.</li></ul><ul id="a85070e3-4976-4047-b6e3-8f5a0cdb3e0e" class="bulleted-list"><li style="list-style-type:disc"><code>Depth Sensing and Depth Maps:</code> By combining the depth information obtained from multiple cameras, more accurate depth sensing and depth maps can be achieved. This is particularly useful for tasks such as 3D reconstruction, virtual reality, augmented reality, and depth-based object detection and tracking.</li></ul><ul id="ea10000c-e14f-4c83-aee8-394c4f02c986" class="bulleted-list"><li style="list-style-type:disc"><code>Camera Network Calibration:</code> Combining views from multiple cameras often requires camera network calibration, which involves estimating the intrinsic and extrinsic parameters of each camera to establish accurate geometric relationships between the cameras. Calibration ensures accurate alignment and consistency between the captured views.</li></ul><p id="5fda6121-d307-433b-9960-0c81104fde37" class="">Applications of combining views from multiple cameras include:</p><ul id="b4df1ac2-b572-44fb-b26c-a4ce974e9826" class="bulleted-list"><li style="list-style-type:disc"><code>3D Reconstruction:</code> Multiple camera views facilitate the reconstruction of 3D scenes, objects, and structures with higher accuracy and completeness.</li></ul><ul id="ca9dbc02-9d8b-4e5a-ae0c-63d276f8cf7a" class="bulleted-list"><li style="list-style-type:disc"><code>Surveillance and Security:</code> Integrating views from multiple cameras enhances surveillance and security systems, enabling wider coverage, better object tracking, and improved identification of individuals or objects.</li></ul><ul id="fd762fc2-d014-4459-83a2-e2998b57b59a" class="bulleted-list"><li style="list-style-type:disc"><code>Augmented Reality:</code> Combining views from multiple cameras helps in aligning virtual objects with the real world, enhancing the realism and accuracy of augmented reality applications.</li></ul><ul id="4cc3e5b4-e0f1-4618-aa5a-fa87e1662dae" class="bulleted-list"><li style="list-style-type:disc"><code>Autonomous Navigation:</code> Multiple cameras can provide comprehensive perception for autonomous vehicles, assisting in obstacle detection, scene understanding, and environment mapping.</li></ul><p id="822407ac-1e00-4825-82f7-1829f3d6b3ce" class="">By combining views from multiple cameras, computer vision systems can leverage the advantages of different perspectives, enhance depth perception, improve coverage, and achieve more robust and accurate results in various applications.</p></div></details><h2 id="7a5a514f-b3fc-4b30-97f7-ebd011379885" class="">MODULE 3 :</h2><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3">Canny Edge Detection</summary><div class="indented"><p id="82059a18-23fd-4aae-8115-51574cc47218" class=""><em>Canny edge detection is a popular and widely used method for detecting edges in digital images. It was developed by John Canny in 1986 and remains a fundamental technique in computer vision and image processing. The Canny edge detection algorithm aims to identify significant edges in an image while reducing noise and minimizing false detections.</em></p><p id="c96524d3-5a2a-4afb-b0cd-39b9b24af827" class="">Here&#x27;s a breakdown of the Canny edge detection process:</p><ul id="e20c9d52-4da2-4c5d-b5d1-e7e2a7456daf" class="bulleted-list"><li style="list-style-type:disc"><code>Gaussian Smoothing:</code>
+To reduce noise and eliminate small variations in pixel intensity, the input image is convolved with a Gaussian filter. The Gaussian smoothing helps to create a smoothed version of the image while preserving the larger-scale intensity changes.</li></ul><ul id="10322f24-eab3-48fe-9586-0faf53d0013a" class="bulleted-list"><li style="list-style-type:disc"><code>Gradient Calculation:</code>
+The gradient of the image is calculated using techniques such as Sobel, Prewitt, or Roberts operators. The gradient magnitude represents the strength of intensity changes at each pixel, while the gradient direction indicates the orientation of the edge.</li></ul><ul id="868e70c5-a95f-437f-aba0-50af14087f78" class="bulleted-list"><li style="list-style-type:disc"><code>Non-maximum Suppression:</code>
+Non-maximum suppression is applied to thin out the edges by preserving only the local maxima in the gradient magnitude along the gradient direction. This step ensures that only the most significant edges are retained.</li></ul><ul id="89bf35bb-1ab4-4688-9c7b-21df9c2eaf19" class="bulleted-list"><li style="list-style-type:disc"><code>Double Thresholding:</code>
+A double thresholding step is used to classify edge pixels into three categories: strong edges, weak edges, and non-edges. The high threshold determines the initial set of strong edges, while the low threshold identifies potential weak edges. Pixels with gradient magnitudes between the two thresholds are labeled as weak edges only if they are connected to strong edges.</li></ul><ul id="65111b98-9f62-4518-93e2-0d1dcddc8617" class="bulleted-list"><li style="list-style-type:disc"><code>Edge Tracking by Hysteresis:</code>
+To address gaps in the detected edges, a process called edge tracking by hysteresis is performed. Weak edge pixels that are connected to strong edges are promoted to strong edges, while isolated weak edges are suppressed. This helps to form continuous and meaningful edge contours.</li></ul><p id="6b75410b-38dd-449a-8a32-d24a5ff515ce" class="">The output of the Canny edge detection algorithm is a binary image where the edges are represented as white pixels against a black background.</p><p id="7d16a4e3-fdb1-47ca-9e0d-df76234cc0e2" class="">Canny edge detection offers several advantages, including robustness to noise, accurate localization of edges, and minimal response to false edges. It is widely used in various computer vision applications such as object detection, image segmentation, feature extraction, and visual tracking.</p><p id="5f8dd4c4-a7ff-4576-b4ed-de6730fd133d" class="">
+</p></div></details><p id="357a03fd-11da-4868-86e2-ea969568c93f" class="">
+</p><p id="fbb548d1-6254-4769-a57d-705aa4f90dd8" class="">
+</p><p id="fa96aab9-de3d-4ff0-9f8c-995e3806a1b7" class="">————— NOTE —————</p><p id="93323a55-d833-4cac-b303-3a706977e9c5" class="">Basic Transformation</p><ol type="1" id="5f6807fd-ca9c-4685-98ae-d13aedcc978d" class="numbered-list" start="1"><li>Reflection (Mirror Image of a image.)</li></ol><ol type="1" id="6b576da5-e029-475b-83dd-80a1a4be9e11" class="numbered-list" start="2"><li>Translation ( Changing location of a figure within image to new location within image)</li></ol><ol type="1" id="ce4f1b31-856b-47b3-b136-352cbc7d9ecb" class="numbered-list" start="3"><li>Rotation (Clock or Anti-Clock wise.)</li></ol><ol type="1" id="89f990bb-f380-4d8c-870a-c508deb05868" class="numbered-list" start="4"><li>Dilation (Size Changing.)</li></ol><ol type="1" id="792741a7-0b12-40c5-9dab-d062497feac7" class="numbered-list" start="5"><li>shear (Cropping of Object within image.)</li></ol><p id="d03fa78e-1d9f-4d4a-9c6e-e04add32f3d3" class="">
+</p></div></article></body></html>
